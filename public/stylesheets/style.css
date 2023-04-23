@@ -1,8 +1,44 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  background-color: hsl(39, 100%, 20%);
+
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav img {
+  height: 40px;
+}
+
+nav ul {
+  justify-content: center;
+  flex: 1;
+  display: flex;
+  gap: 50px;
+  list-style-type: none;
+  font-size: 20px;
 }

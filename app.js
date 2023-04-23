@@ -3,9 +3,12 @@ let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
+let mongoose = require("./db/connection");
 
 let indexRouter = require("./routes/index");
-let usersRouter = require("./routes/users");
+let clubsRouter = require("./routes/clubs");
+let playersRouter = require("./routes/players");
+let marketRouter = require("./routes/market");
 
 let app = express();
 
@@ -20,7 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/clubs", clubsRouter);
+app.use("/players", playersRouter);
+app.use("/market", marketRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
