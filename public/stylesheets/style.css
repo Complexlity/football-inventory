@@ -8,6 +8,11 @@
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
 }
 
 a {
