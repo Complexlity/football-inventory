@@ -35,21 +35,22 @@ async function main() {
 async function createPlayers() {
   console.log("Creating Players");
   await Promise.all([
-    await playerCreate("Havertz", 29, positions[2], 100, clubs[0]),
-    await playerCreate("Mikel", 20, positions[0], 100, clubs[1]),
-    await playerCreate("Juninho", 22, positions[1], 100, clubs[2]),
-    await playerCreate("Griezmann", 40, positions[2], 100, clubs[3]),
-    await playerCreate("Ronaldo", 19, positions[0], 100, clubs[0]),
-    await playerCreate("De Gea", 25, positions[1], 100, clubs[1]),
-    await playerCreate("Zapata", 27, positions[2], 100, clubs[2]),
-    await playerCreate("Salah", 29, positions[0], 100, clubs[3]),
-    await playerCreate("Oshimen", 34, positions[1], 100, clubs[0]),
-    await playerCreate("Maguire", 30, positions[2], 100, clubs[1]),
-    await playerCreate("Robinho", 42, positions[0], 100, clubs[2]),
-    await playerCreate("Zidane", 28, positions[1], 100, clubs[3]),
-    await playerCreate("Kepa", 28, positions[3], 100, clubs[0]),
-    await playerCreate("De Bruyne", 24, positions[3], 100, clubs[1]),
-    await playerCreate("Kahn", 28, positions[3], 100, clubs[2]),
+    await playerCreate("Havertz", 29, positions[2], 50, clubs[0]),
+    await playerCreate("Mikel", 20, positions[0], 26, clubs[1]),
+    await playerCreate("Juninho", 22, positions[1], 40, clubs[2]),
+    await playerCreate("Griezmann", 40, positions[2], 12, clubs[3]),
+    await playerCreate("Ronaldo", 19, positions[0], 42, clubs[0]),
+    await playerCreate("De Gea", 25, positions[1], 60, clubs[1]),
+    await playerCreate("Zapata", 27, positions[2], 150, clubs[2]),
+    await playerCreate("Salah", 29, positions[0], 33, clubs[3]),
+    await playerCreate("Oshimen", 34, positions[1], 28, clubs[0]),
+    await playerCreate("Maguire", 30, positions[2], 80, clubs[1]),
+    await playerCreate("Robinho", 42, positions[0], 73, clubs[2]),
+    await playerCreate("Zidane", 28, positions[1], 45, clubs[3]),
+    await playerCreate("Kepa", 28, positions[3], 54, clubs[0]),
+    await playerCreate("De Bruyne", 24, positions[3], 120, clubs[1]),
+    await playerCreate("Kahn", 28, positions[3], 88, clubs[2]),
+    await playerCreate("Camavinga", 20, positions[3], 100, clubs[3]),
   ]);
   console.log("Creating Players Complete");
 }
