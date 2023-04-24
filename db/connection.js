@@ -8,5 +8,3 @@ async function main() {
   await mongoose.connect(mongoDB);
   console.log("I connected");
 }
-
-exports.mongoose = mongoose;
