@@ -34,7 +34,7 @@ async function main() {
 
 async function createPlayers() {
   console.log("Creating Players");
-  await Promises.all([
+  await Promise.all([
     await playerCreate("Havertz", 29, positions[2], 100, clubs[0]),
     await playerCreate("Mikel", 20, positions[0], 100, clubs[1]),
     await playerCreate("Juninho", 22, positions[1], 100, clubs[2]),
