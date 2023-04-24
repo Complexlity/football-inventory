@@ -2,5 +2,16 @@
 <div>
   <h1>Welcome to footballers home</h1>
   <p>In this space, we would be able to see all players and their status in the market</p>
+  <% if (error){ %>
+  <p>Something Went wrong man. Try again later</p>
+  <% } else { %>
+    <p>These are the items in our database</p>
+  <ul>
+    <li>Players: <strong><%= data.player_count %></strong></li>
+    <li>Clubs: <strong><%= data.club_count %></strong></li>
+    <li>Positions: <strong><%= data.position_count %></strong> </li>
+    <li></li>
+  </ul>
+  <% } %>
 </div>
 <%- include('footer') %>
