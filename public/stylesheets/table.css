@@ -19,15 +19,15 @@ caption {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
-tr > td:last-of-type,
-tr > td:nth-of-type(3),
-tr > th:nth-of-type(4),
-tr > th:last-of-type {
+tr > td:last-of-type {
   text-align: end;
 }
 
 tr > td:nth-of-type(2),
-tr > th:nth-of-type(3) {
+tr > th:nth-of-type(3),
+tr > td:nth-of-type(3),
+tr > th:nth-of-type(4),
+tr > th:last-of-type {
   text-align: center;
 }
 
