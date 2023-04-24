@@ -11,5 +11,5 @@ exports.index = async (req, res) => {
   } catch (err) {
     error = err;
   }
-  res.render("players", { title: "Players Page", players, error });
+  res.render("players", { title: "All Players", players, error });
 };
