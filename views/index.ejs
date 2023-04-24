@@ -7,9 +7,9 @@
   <% } else { %>
     <p>These are the items in our database</p>
   <ul>
-    <li>Players: <strong><%= data.player_count %></strong></li>
-    <li>Clubs: <strong><%= data.club_count %></strong></li>
-    <li>Positions: <strong><%= data.position_count %></strong> </li>
+    <li>Players: <strong><%= data[0] %></strong></li>
+    <li>Clubs: <strong><%= data[1] %></strong></li>
+    <li>Positions: <strong><%= data[2] %></strong> </li>
     <li></li>
   </ul>
   <% } %>

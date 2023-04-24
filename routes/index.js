@@ -12,11 +12,7 @@ router.get("/", async function (req, res) {
     Club.countDocuments({}),
     Position.countDocuments({}),
   ])
-    .then((results) => {
-      player_count = results[0];
-      club_count = results[1];
-      position_count = results[2];
-      const data = { player_count, club_count, position_count };
+    .then((data) => {
       res.render("index", {
         title: "My Home Page",
         data,
