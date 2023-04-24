@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-
+require("dotenv").config();
 mongoose.set("strictQuery", false);
-const mongoDB =
-  "mongodb+srv://myAtlasDBUser:myatlas-001@myatlasclusteredu.hotpokv.mongodb.net/football-inventory?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGODB_CONNECTION_STRING;
 
 main().catch((err) => console.log(err));
 async function main() {
