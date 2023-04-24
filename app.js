@@ -1,9 +1,11 @@
+require("./db/connection");
 let createError = require("http-errors");
 let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
-let mongoose = require("./db/connection");
+let livereload = require("livereload");
+let connectLiveReload = require("connect-livereload");
 
 let indexRouter = require("./routes/index");
 let clubsRouter = require("./routes/clubs");
@@ -11,7 +13,14 @@ let playersRouter = require("./routes/players");
 let marketRouter = require("./routes/market");
 
 let app = express();
+const liveReloadServer = livereload.createServer();
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 100);
+});
 
+app.use(connectLiveReload());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
