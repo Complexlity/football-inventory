@@ -62,3 +62,16 @@ form {
   width: auto;
   margin: 0 auto;
 }
+
+.caption {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.caption h2 {
+  padding: 10px;
+  font-size: 2rem;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  position: relative;
+  flex: 1;
+}
