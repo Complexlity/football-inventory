@@ -12,3 +12,7 @@ exports.index = async (req, res) => {
   }
   res.render("clubs", { title: "Clubs Home Page", clubs, error });
 };
+
+exports.create = (req, res) => {
+  res.render("clubs_create", { title: "Create New Club", error: "" });
+};

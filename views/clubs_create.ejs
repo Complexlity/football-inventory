@@ -1,0 +1,25 @@
+
+<%- include('header') %>
+<form>
+    <!-- Grid -->
+    <div class="grid">
+            <h2><%= title %></h2>
+      
+          <!-- Markup example 1: input is inside label -->
+          <label for="clubname">
+            Club Name
+            <input type="text" id="clubname" name="clubname" placeholder="First name" required>
+            <small><%= error %></small>
+        </label>
+      
+          <label for="country">
+            Country
+            <input type="text" id="country" name="country" placeholder="Last name" required>
+            <small><%= error %></small>
+        </label>
+        </div>
+        <!-- Button -->
+        <button class="inline" type="submit">Submit</button>
+      
+      </form>
+<%- include('footer') %>

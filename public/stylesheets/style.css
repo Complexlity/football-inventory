@@ -52,3 +52,13 @@ nav .active a {
   color: rgb(11, 225, 11);
   font-weight: bold;
 }
+
+form {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.inline {
+  width: auto;
+  margin: 0 auto;
+}

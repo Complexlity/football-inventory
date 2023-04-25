@@ -7,6 +7,8 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get("/create", clubs_controller.create);
+
 router.get("/", clubs_controller.index);
 
 module.exports = router;
