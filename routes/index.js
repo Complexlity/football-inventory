@@ -5,6 +5,10 @@ const Player = require("../models/player");
 const Club = require("../models/club");
 const Position = require("../models/position");
 
+router.use((req, res, next) => {
+  global.active = "home";
+  next();
+});
 /* GET home page. */
 router.get("/", async function (req, res) {
   await Promise.all([
