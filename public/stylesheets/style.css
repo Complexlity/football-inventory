@@ -83,3 +83,11 @@ form div {
 .no-underline:hover {
   text-decoration: none;
 }
+
+.center {
+  text-align: center !important;
+}
+
+.bold {
+  font-weight: bold;
+}

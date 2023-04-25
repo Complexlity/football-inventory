@@ -1,0 +1,61 @@
+<%- include('header') %>
+<header class="caption">
+
+  <h2 class="inline"><%= club.name %> - <%= club.country %></h2>
+
+  <a class="no-underline" href="/players/create"><button class="inline">Add Player</button></a>
+
+</header>
+<table role="grid">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Price</th>
+      <th>For Sale</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if(error) { %>
+
+    <tr>
+      <th colspan="6" class="error">Sorry Something went wrong </th>
+    </tr>
+    <tr>
+      <th><%= error %></th>
+    </tr>
+    <tr>
+      <th colspan="6" class="error"><a href="/players"><button>Reload</button></a></th>
+    </tr>
+    <% } else { %>
+    <% const order = ['forward', 'midfielder', 'defender', 'goal keeper'] %>
+    <% for (let key of order) { %>
+    <% let playersByPrice = players[key].sort((a, b) => a.price - b.price); %>
+    <tr>
+      <th colspan="4"></th> <!-- empty cell to align with the first row -->
+    </tr>
+    <tr>
+      <th colspan="4" class="bold center"><%= key.charAt(0).toUpperCase() + key.slice(1) %>s</th>
+    </tr>
+    <tr>
+      <th colspan="4"></th> <!-- empty cell to align with the first row -->
+    </tr>
+
+    <% playersByPrice.forEach(player => { %>
+    <tr>
+      <th><%= player.name %></th>
+      <td><%= player.age %></td>
+
+      <td>€<%= player.price %> million</td>
+      <td><%= player.forSale? "Yes" : "No" %></td>
+    </tr>
+    <% }) %>
+
+    <% } %>
+
+    <% } %>
+  </tbody>
+</table>
+
+<%- include('footer') %>

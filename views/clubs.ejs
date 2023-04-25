@@ -4,13 +4,13 @@
 <% if(error) { %>
 <p>There was some problem fetching the clubs. Please try again later</p>
 <% } else { %>
-    <ul>
-        <% clubs.forEach(club => { %>
-<li><a href=""><%= club.name %> - <%= club.country %></a></li>
-            <% }) %>
-    </ul>
- <p>Total Number Of Clubs: <%= clubs.length %></p>
- <a href="/clubs/create" role="button">Create New Club</a>
-    <% } %>
- 
+<ul>
+  <% clubs.forEach(club => { %>
+  <li><a href="/clubs/<%= club._id %>"><%= club.name %> - <%= club.country %></a></li>
+  <% }) %>
+</ul>
+<p>Total Number Of Clubs: <%= clubs.length %></p>
+<a href="/clubs/create" role="button">Create New Club</a>
+<% } %>
+
 <%- include('footer') %>
