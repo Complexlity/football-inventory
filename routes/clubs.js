@@ -9,7 +9,7 @@ router.use((req, res, next) => {
 
 router.get("/", clubs_controller.index);
 router.get("/create", clubs_controller.create);
-
+router.get("/:id/create", clubs_controller.player_create);
 router.get("/:id", clubs_controller.detail);
 
 module.exports = router;

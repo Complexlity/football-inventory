@@ -12,12 +12,18 @@
       <option value="<%= position.name.toLowerCase() %>"><%= position.name %> (<%= position.abbr %>)</option>
       <% }) %>
     </select>
+    <% if (Array.isArray(clubs)) { %>
     <select>
       <option value="" disabled selected>Club</option>
       <% clubs.forEach(club => { %>
       <option value="<%= club.name.toLowerCase() %>"><%= club.name %> </option>
       <% }) %>
     </select>
+    <% } else { %>
+    <select>
+      <option value="" name="<%= clubs.name.toLowerCase() %>" disable selected><%= clubs.name %></option>
+    </select>
+    <% } %>
     <input type="number" name="price" placeholder="Market Value">
 
     <p>Is This Player For Sale?</p>
