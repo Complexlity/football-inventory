@@ -54,8 +54,12 @@ nav .active a {
 }
 
 form {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+form div {
+  margin-bottom: 1rem;
 }
 
 .inline {
@@ -74,4 +78,8 @@ form {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   position: relative;
   flex: 1;
+}
+
+.no-underline:hover {
+  text-decoration: none;
 }
