@@ -27,7 +27,23 @@ exports.index = async (req, res) => {
   res.render("players", { title: "All Players", players, error });
 };
 
-exports.create = async (req, res) => {
+exports.detail = async (req, res) => {
+  const id = req.params.id;
+  let error = "";
+  let player = "";
+  try {
+    player = await Player.findOne({ _id: id }).populate("club position");
+  } catch (err) {
+    error = err;
+  }
+  res.render("players_detail", {
+    title: `${player.name || "Player's Detail"} Page`,
+    player,
+    error,
+  });
+};
+
+exports.create_get = async (req, res) => {
   let error = "";
   let clubs = "";
   let positions = "";
@@ -53,7 +69,7 @@ exports.create = async (req, res) => {
   });
 };
 
-exports.update = async (req, res) => {
+exports.update_get = async (req, res) => {
   let playerId = req.params.id;
   let error = "";
   let clubs = "";
@@ -89,20 +105,4 @@ exports.update = async (req, res) => {
     player,
   });
   // res.json({ filteredClubs, filteredPositions });
-};
-
-exports.detail = async (req, res) => {
-  const id = req.params.id;
-  let error = "";
-  let player = "";
-  try {
-    player = await Player.findOne({ _id: id }).populate("club position");
-  } catch (err) {
-    error = err;
-  }
-  res.render("players_detail", {
-    title: `${player.name || "Player's Detail"} Page`,
-    player,
-    error,
-  });
 };

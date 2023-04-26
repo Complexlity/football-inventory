@@ -14,7 +14,7 @@ exports.index = async (req, res) => {
   res.render("clubs", { title: "Clubs Home Page", clubs, error });
 };
 
-exports.create = (req, res) => {
+exports.create_get = (req, res) => {
   res.render("clubs_create", { title: "Create New Club", error: "" });
 };
 
@@ -56,7 +56,7 @@ exports.detail = async (req, res) => {
   });
 };
 
-exports.player_create = async (req, res) => {
+exports.player_create_get = async (req, res) => {
   let error = "";
   let positions = "";
   let clubs = "";

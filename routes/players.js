@@ -7,8 +7,8 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/create", players_controller.create);
-router.get("/update/:id", players_controller.update);
+router.get("/create", players_controller.create_get);
+router.get("/update/:id", players_controller.update_get);
 
 router.get("/", players_controller.index);
 
