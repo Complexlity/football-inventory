@@ -1,45 +1,47 @@
 <%- include('header') %>
 <table role="grid">
-    <header class="caption">
-        
-            <h2 class="inline">All Players</h2>
-            <a class="no-underline" href="/players/create"><button class="inline">Add Player</button></a>
-        
-    </header>
-    
-    
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Position</th>
-            <th>Club</th>
-            <th>Price</th>
-            <th>For Sale</th>
-        </tr>
-    </thead>
-    
+  <header class="caption">
 
-    <tbody>
-        <% if(error) { %>
-        <tr>
-            <th colspan="6" class="error">Sorry Something went wrong </th>
-            
-        </tr>
-        <tr><th colspan="6" class="error"><a href="/players"><button>Reload</button></a></th></tr>
-        <% } else { %>
-            <% players.forEach(player => { %>
-                <tr>
-                    <th><%= player.name %></th>
-                    <td><%= player.age %></td>
-                    <td><%= player.position.name %></td>
-                    <td><%= player.club.name %></td>
-                    <td>€<%= player.price %> million</td>
-                    <td><%= player.forSale? "Yes" : "No" %></td>
-                </tr>
-            <% }) %>
-            <% } %>
-    </tbody>
-    </table>
-    
+    <h2 class="inline">All Players</h2>
+    <a class="no-underline" href="/players/create"><button class="inline">Add Player</button></a>
+
+  </header>
+
+
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Club</th>
+      <th>Price</th>
+      <th>For Sale</th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% if(error) { %>
+    <tr>
+      <th colspan="6" class="error">Sorry Something went wrong </th>
+
+    </tr>
+    <tr>
+      <th colspan="6" class="error"><a href="/players"><button>Reload</button></a></th>
+    </tr>
+    <% } else { %>
+    <% players.forEach(player => { %>
+    <tr>
+      <th><a href="/players/<%= player._id %>"><%= player.name %></a></th>
+      <td><%= player.age %></td>
+      <td><%= player.position.name %></td>
+      <td><a href="/clubs/<%= player.club._id %>"><%= player.club.name %></a></td>
+      <td>€<%= player.price %> million</td>
+      <td><%= player.forSale? "Yes" : "No" %></td>
+    </tr>
+    <% }) %>
+    <% } %>
+  </tbody>
+</table>
+
 <%- include('footer') %>

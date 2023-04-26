@@ -11,4 +11,6 @@ router.get("/create", players_controller.create);
 
 router.get("/", players_controller.index);
 
+router.get("/:id", players_controller.detail);
+
 module.exports = router;

@@ -41,3 +41,19 @@ exports.create = async (req, res) => {
     positions,
   });
 };
+
+exports.detail = async (req, res) => {
+  const id = req.params.id;
+  let error = "";
+  let player = "";
+  try {
+    player = await Player.findOne({ _id: id }).populate("club position");
+  } catch (err) {
+    error = err;
+  }
+  res.render("players_detail", {
+    title: `${player.name || "Player's Detail"} Page`,
+    player,
+    error,
+  });
+};
