@@ -44,7 +44,7 @@
 
     <% playersByPrice.forEach(player => { %>
     <tr>
-      <th><%= player.name %></th>
+      <th><a href="/players/<%= player._id %>"><%= player.name %></a></th>
       <td><%= player.age %></td>
 
       <td>€<%= player.price %> million</td>

@@ -8,7 +8,7 @@ exports.index = async (req, res) => {
   try {
     players = await Player.find({}).populate({
       path: "club position",
-      select: "name -_id",
+      select: "name",
     });
   } catch (err) {
     error = err;
