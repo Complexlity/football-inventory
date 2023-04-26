@@ -1,0 +1,46 @@
+<%- include('header') %>
+<form>
+  <h2><%= title %></h2>
+  <!-- Grid -->
+  <div>
+    <label for="name">Name<input id="name" type="text" name="playername" value="<%= player.name %>" placeholder="Name. e.g Ronaldo" required></label>
+    <label for="age">Age<input id="age" type="number" name="age" placeholder="age. e.g 20" value="<%= player.age %>" required></label>
+
+    <label for="positions">
+      Position
+      <select id="positions">
+        <option value="<%= player.position.name.toLowerCase() %>" selected><%= player.position.name %> (<%= player.position.abbr %>)</option>
+        <% positions.forEach(position => { %>
+        <option value="<%= position.name.toLowerCase() %>"><%= position.name %> (<%= position.abbr %>)</option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label for="clubs">
+      Club
+      <select id="clubs">
+        <option value="<%= player.club.name.toLowerCase() %>" selected><%= player.club.name %></option>
+        <% clubs.forEach(club => { %>
+        <option value="<%= club.name.toLowerCase() %>"><%= club.name %> </option>
+        <% }) %>
+      </select>
+    </label>
+    <label for="price">
+      Price
+      <input type="number" id="price" value="<%= player.price
+       %>" name="price" placeholder="Market Value">
+    </label>
+
+    <p>Is This Player For Sale?</p>
+    <input type="radio" id="yes" name="forsale" value="1" <%= player.forSale ? "checked" : "" %> />
+    <label for="yes">Yes</label>
+    <input type="radio" id="no" name="forsale" value="0" <%=  player.forSale ? "" : "checked" %> />
+    <label for="no">No</label>
+
+  </div>
+  <!-- Button -->
+  <button class="inline" type="submit">Submit</button>
+
+</form>
+<script src="/javascripts/playerUpdate.js"></script>
+<%- include('footer') %>

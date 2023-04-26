@@ -8,7 +8,7 @@
 </h2>
 <p>I have been in <a href="/clubs/<%= player.club._id %>"><%= player.club.name %></a> for 10 years. I love being here, getting paid and doing what I love to do</p>
 <div class="grid">
-  <a href=""><button>Update <%= player.name %> Details</button></a>
+  <a href="/players/update/<%= player._id %>"><button>Update <%= player.name %> Details</button></a>
   <a href=""><button>Delete <%= player.name %></button></a>
 </div>
 <% } %>
