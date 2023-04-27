@@ -7,7 +7,6 @@ exports.index = async (req, res) => {
   // Find all clubs
   try {
     clubs = await Club.find({}).sort({ name: "asc" });
-    console.log(clubs);
   } catch (err) {
     error = err;
   }
@@ -16,6 +15,28 @@ exports.index = async (req, res) => {
 
 exports.create_get = (req, res) => {
   res.render("clubs_create", { title: "Create New Club", error: "" });
+};
+
+exports.create_post = (req, res) => {
+  const clubName = req.body.clubname;
+  const countryName = req.body.country;
+  // VALIDATE INPUTS HERE
+  const newClub = new Club({
+    name: clubName,
+    country: countryName,
+    players: [],
+  });
+  newClub
+    .save()
+    .then(() => {
+      res.redirect("/clubs");
+    })
+    .catch((err) => {
+      res.render("clubs_create", {
+        title: "Create New Club",
+        error: err,
+      });
+    });
 };
 
 exports.detail = async (req, res) => {
@@ -31,20 +52,24 @@ exports.detail = async (req, res) => {
         populate: { path: "position" },
       })
       .populate("players.positon");
-    // console.log(club);
 
     const players = club.players;
-    // console.log(players);
-
-    groupedPlayers = players.reduce((acc, player) => {
-      const positionName = player.position.name.toLowerCase();
-      if (!acc[positionName]) {
-        acc[positionName] = [];
-      }
-      acc[positionName].push(player);
-      return acc;
-    }, {});
+    if (players.length === 0) {
+      groupedPlayers = [];
+      groupedPlayers = [];
+    } else {
+      groupedPlayers = players.reduce((acc, player) => {
+        const positionName = player.position.name.toLowerCase();
+        if (!acc[positionName]) {
+          acc[positionName] = [];
+        }
+        acc[positionName].push(player);
+        return acc;
+      }, {});
+    }
     console.log(groupedPlayers);
+
+    return;
   } catch (err) {
     error = err;
   }

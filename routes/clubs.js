@@ -9,6 +9,7 @@ router.use((req, res, next) => {
 
 router.get("/", clubs_controller.index);
 router.get("/create", clubs_controller.create_get);
+router.post("/create", clubs_controller.create_post);
 router.get("/:id/create", clubs_controller.player_create_get);
 router.get("/:id", clubs_controller.detail);
 
