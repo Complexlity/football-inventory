@@ -1,5 +1,5 @@
 <%- include('header') %>
-<form>
+<form action="/players/update/<%= player._id %>" method="post">
   <h2><%= title %></h2>
   <!-- Grid -->
   <div>
@@ -8,20 +8,20 @@
 
     <label for="positions">
       Position
-      <select id="positions">
-        <option value="<%= player.position.name.toLowerCase() %>" selected><%= player.position.name %> (<%= player.position.abbr %>)</option>
+      <select name="position" id="positions">
+        <option value="<%= player.position.abbr %>" selected><%= player.position.name %> (<%= player.position.abbr %>)</option>
         <% positions.forEach(position => { %>
-        <option value="<%= position.name.toLowerCase() %>"><%= position.name %> (<%= position.abbr %>)</option>
+        <option value="<%= position.abbr %>"><%= position.name %> (<%= position.abbr %>)</option>
         <% }) %>
       </select>
     </label>
 
     <label for="clubs">
       Club
-      <select id="clubs">
-        <option value="<%= player.club.name.toLowerCase() %>" selected><%= player.club.name %></option>
+      <select name="club" id="clubs">
+        <option value="<%= player.club.name %>" selected><%= player.club.name %></option>
         <% clubs.forEach(club => { %>
-        <option value="<%= club.name.toLowerCase() %>"><%= club.name %> </option>
+        <option value="<%= club.name %>"><%= club.name %> </option>
         <% }) %>
       </select>
     </label>
@@ -32,9 +32,9 @@
     </label>
 
     <p>Is This Player For Sale?</p>
-    <input type="radio" id="yes" name="forsale" value="1" <%= player.forSale ? "checked" : "" %> />
+    <input type="radio" id="yes" name="forsale" value=1 <%= player.forSale ? "checked" : "" %> />
     <label for="yes">Yes</label>
-    <input type="radio" id="no" name="forsale" value="0" <%=  player.forSale ? "" : "checked" %> />
+    <input type="radio" id="no" name="forsale" value=0 <%=  player.forSale ? "" : "checked" %> />
     <label for="no">No</label>
 
   </div>

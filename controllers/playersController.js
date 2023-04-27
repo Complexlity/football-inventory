@@ -146,3 +146,42 @@ exports.update_get = async (req, res) => {
   });
   // res.json({ filteredClubs, filteredPositions });
 };
+
+exports.update_post = async (req, res) => {
+  let player, playerClub, position, positionId, clubId;
+  const id = req.params.id;
+  const {
+    playername: name,
+    age,
+    position: abbr,
+    club,
+    price,
+    forsale,
+  } = req.body;
+  //------------------------
+  // VALIDATE INPUTS HERE
+  //------------------------
+  await Promise.all([
+    Player.findOne({ _id: id }),
+    Position.findOne({ abbr }),
+    Club.findOne({ name: club }),
+  ]).then(async (result) => {
+    player = result[0];
+    positionId = result[1]._id;
+    playerClub = result[2];
+    clubId = playerClub._id;
+
+    player.name = name;
+    player.age = age;
+    player.club = clubId;
+    player.position = positionId;
+    player.price = price;
+    player.forSale = forsale === "1";
+    const clubPlayers = playerClub.players;
+    const playerId = player._id;
+    const index = clubPlayers.indexOf(playerId);
+    if (index === -1) playerClub.players.push(player._id);
+    await Promise.all([player.save(), playerClub.save()]);
+    res.redirect("/players");
+  });
+};
