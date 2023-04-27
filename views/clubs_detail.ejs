@@ -28,10 +28,9 @@
     <tr>
       <th colspan="6" class="error"><a href="/players"><button>Reload</button></a></th>
     </tr>
-    <% } else { %>
-    <% const order = ['forward', 'midfielder', 'defender', 'goal keeper'] %>
-    <% for (let key of order) { %>
-    <% let playersByPrice = players[key].sort((a, b) => a.price - b.price); %>
+    <% } else if (Object.keys(players).length !== 0) { %>
+
+    <% for (let key in players) { %>
     <tr>
       <th colspan="4"></th> <!-- empty cell to align with the first row -->
     </tr>
@@ -41,6 +40,8 @@
     <tr>
       <th colspan="4"></th> <!-- empty cell to align with the first row -->
     </tr>
+
+    <% let playersByPrice = players[key].sort((a, b) => a.price - b.price); %>
 
     <% playersByPrice.forEach(player => { %>
     <tr>
@@ -54,7 +55,12 @@
 
     <% } %>
 
+    <% } else {%>
+    <tr>
+      <th colspan="5" class="center">No players Found</th>
+    </tr>
     <% } %>
+
   </tbody>
 </table>
 
