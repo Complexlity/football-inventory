@@ -8,9 +8,9 @@
 </h2>
 <p>I have been in <a href="/clubs/<%= player.club._id %>"><%= player.club.name %></a> for <%= player.age - 18 %> years. I love being here, getting paid and doing what I love to do</p>
 
-<a href="/players/update/<%= player._id %>"><button>Update <%= player.name %> Details</button></a>
+<a href="/players/update/<%= player._id %>"><button class="not-full">Update <%= player.name %> Details</button></a>
 <form onsubmit="return confirm(`Do you really want to delete <%= player.name %> from the database? `)" action="/players/delete/<%= player._id %>" method="post">
-  <input type="submit" name="delete" value="Delete <%= player.name %>">
+  <input class="not-full" type="submit" name="delete" value="Delete <%= player.name %>">
 </form>
 
 </div>

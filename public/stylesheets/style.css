@@ -95,3 +95,9 @@ form div {
 .flex {
   display: flex;
 }
+
+.not-full {
+  width: 80%;
+  max-width: 500px;
+  margin: 10px auto;
+}
