@@ -191,3 +191,26 @@ exports.update_post = async (req, res) => {
     res.redirect("/players");
   });
 };
+
+exports.delete_post = async (req, res) => {
+  const id = req.params.id;
+  //------------------------------------------
+  // MIDDLEWARE TO ONLY ALLOW DELETION BY AUTHORIZED PERSONNEL GOES HERE
+  //-------------------------------------------
+  Player.findOne({ _id: id })
+    .then(async (player) => {
+      const club = await Club.findOne({ _id: player.club });
+      club.players = club.players.filter((player) => player !== id);
+      return club;
+    })
+    .then((club) => {
+      club.save();
+      Player.deleteOne({ _id: id });
+    })
+    .then(() => {
+      res.redirect("/players");
+    })
+    .catch((err) => {
+      res.render("/players", { title: "All Players", error: err, players: [] });
+    });
+};
