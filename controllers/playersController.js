@@ -76,6 +76,7 @@ exports.create_post = async (req, res) => {
   const clubName = req.body.club;
   const price = req.body.price;
   const forSale = req.body.forsale === "1";
+
   //------------------------
   // VALIDATE INPUTS HERE
   //------------------------
@@ -87,7 +88,6 @@ exports.create_post = async (req, res) => {
       // return;
       club = result[0];
       clubId = club._id;
-
       positionId = result[1]._id;
       console.log("I am here");
 
@@ -148,7 +148,7 @@ exports.update_get = async (req, res) => {
 };
 
 exports.update_post = async (req, res) => {
-  let player, playerClub, position, positionId, clubId;
+  let player, newClub, position, positionId, clubId, oldClub;
   const id = req.params.id;
   const {
     playername: name,
@@ -161,6 +161,7 @@ exports.update_post = async (req, res) => {
   //------------------------
   // VALIDATE INPUTS HERE
   //------------------------
+
   await Promise.all([
     Player.findOne({ _id: id }),
     Position.findOne({ abbr }),
@@ -168,20 +169,25 @@ exports.update_post = async (req, res) => {
   ]).then(async (result) => {
     player = result[0];
     positionId = result[1]._id;
-    playerClub = result[2];
-    clubId = playerClub._id;
+    newClub = result[2];
+    clubId = newClub._id;
 
+    // Check if old and new club are not the same. Deletes player from old club and adds player to new club
+    if (player.club !== clubId) {
+      oldClub = await Club.findOne({ _id: player.club });
+      oldClub.players = oldClub.players.filter((value) => value !== player._id);
+      newClub.players.push(player._id);
+    }
+
+    // Assign player to newly updated values
     player.name = name;
     player.age = age;
     player.club = clubId;
     player.position = positionId;
     player.price = price;
     player.forSale = forsale === "1";
-    const clubPlayers = playerClub.players;
-    const playerId = player._id;
-    const index = clubPlayers.indexOf(playerId);
-    if (index === -1) playerClub.players.push(player._id);
-    await Promise.all([player.save(), playerClub.save()]);
+
+    await Promise.all([player.save(), newClub.save(), oldClub.save()]);
     res.redirect("/players");
   });
 };
