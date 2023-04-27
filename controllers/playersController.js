@@ -59,7 +59,6 @@ exports.create_get = async (req, res) => {
   } catch (err) {
     error = err;
   }
-  console.log(positions);
 
   res.render("players_create", {
     title: "Create A New Player",

@@ -67,9 +67,6 @@ exports.detail = async (req, res) => {
         return acc;
       }, {});
     }
-    console.log(groupedPlayers);
-
-    return;
   } catch (err) {
     error = err;
   }
