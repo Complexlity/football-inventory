@@ -200,14 +200,10 @@ exports.delete_post = async (req, res) => {
   Player.findOne({ _id: id })
     .then(async (player) => {
       const club = await Club.findOne({ _id: player.club });
-      club.players = club.players.filter((player) => player !== id);
-      return club;
-    })
-    .then((club) => {
-      club.save();
-      Player.deleteOne({ _id: id });
-    })
-    .then(() => {
+      club.players = club.players.filter(
+        (playerId) => playerId.toString() !== id
+      );
+      await Promise.all([club.save(), Player.deleteOne({ _id: id })]);
       res.redirect("/players");
     })
     .catch((err) => {
