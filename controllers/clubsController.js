@@ -20,7 +20,9 @@ exports.create_get = (req, res) => {
 exports.create_post = (req, res) => {
   const clubName = req.body.clubname;
   const countryName = req.body.country;
+  //------------------------
   // VALIDATE INPUTS HERE
+  //------------------------
   const newClub = new Club({
     name: clubName,
     country: countryName,

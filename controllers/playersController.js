@@ -68,6 +68,47 @@ exports.create_get = async (req, res) => {
   });
 };
 
+exports.create_post = async (req, res) => {
+  let clubId, positionId, club;
+  const name = req.body.playername;
+  const age = req.body.age;
+  const positionAbbr = req.body.position;
+  const clubName = req.body.club;
+  const price = req.body.price;
+  const forSale = req.body.forsale === "1";
+  //------------------------
+  // VALIDATE INPUTS HERE
+  //------------------------
+  await Promise.all([
+    Club.findOne({ name: clubName }),
+    Position.findOne({ abbr: positionAbbr }),
+  ])
+    .then(async (result) => {
+      // return;
+      club = result[0];
+      clubId = club._id;
+
+      positionId = result[1]._id;
+      console.log("I am here");
+
+      const newPlayer = new Player({
+        name,
+        age,
+        position: positionId,
+        club: clubId,
+        price,
+        forSale,
+      });
+      club.players.push(newPlayer);
+      await Promise.all([newPlayer.save(), club.save()]);
+      return res.redirect(`/clubs/${clubId}`);
+    })
+
+    .catch((err) => {
+      res.redirect(`/players/create`);
+    });
+};
+
 exports.update_get = async (req, res) => {
   let playerId = req.params.id;
   let error = "";
