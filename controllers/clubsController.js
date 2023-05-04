@@ -20,7 +20,7 @@ exports.create_get = (req, res) => {
 };
 
 exports.create_post = [
-  body("clubname", "Name Cannot Be Blank").trim().isLength({ min: 5 }).escape(),
+  body("clubname", "Name Cannot Be Blank").notEmpty().trim().escape(),
   body("country", "Clubs Must Have A Country").notEmpty().trim().escape(),
 
   async (req, res, next) => {
