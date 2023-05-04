@@ -1,23 +1,24 @@
 const Club = require("../models/club");
 const Position = require("../models/position");
 
-exports.index = async (req, res) => {
+exports.index = async (req, res, next) => {
   let error = "";
   let clubs = {};
   // Find all clubs
   try {
     clubs = await Club.find({}).sort({ name: "asc" });
+    return res.render("clubs", { title: "Clubs Home Page", clubs, error });
   } catch (err) {
     error = err;
+    return next(err);
   }
-  res.render("clubs", { title: "Clubs Home Page", clubs, error });
 };
 
 exports.create_get = (req, res) => {
   res.render("clubs_create", { title: "Create New Club", error: "" });
 };
 
-exports.create_post = (req, res) => {
+exports.create_post = (req, res, next) => {
   const clubName = req.body.clubname;
   const countryName = req.body.country;
   //------------------------
@@ -34,14 +35,15 @@ exports.create_post = (req, res) => {
       res.redirect("/clubs");
     })
     .catch((err) => {
-      res.render("clubs_create", {
-        title: "Create New Club",
-        error: err,
-      });
+      // res.render("clubs_create", {
+      //   title: "Create New Club",
+      //   error: err,
+      // });
+      return next(err);
     });
 };
 
-exports.detail = async (req, res) => {
+exports.detail = async (req, res, next) => {
   let error = "";
   let club = "";
   const id = req.params.id;
@@ -69,15 +71,16 @@ exports.detail = async (req, res) => {
         return acc;
       }, {});
     }
+    res.render("clubs_detail", {
+      title: "Club Page",
+      error,
+      players: groupedPlayers,
+      club,
+    });
   } catch (err) {
     error = err;
+    return next(err);
   }
-  res.render("clubs_detail", {
-    title: "Club Page",
-    error,
-    players: groupedPlayers,
-    club,
-  });
 };
 
 exports.player_create_get = async (req, res) => {
@@ -96,6 +99,7 @@ exports.player_create_get = async (req, res) => {
     });
   } catch (err) {
     error = err;
+    return next(err);
   }
 
   res.render("players_create", {
