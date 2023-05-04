@@ -1,5 +1,6 @@
 const Club = require("../models/club");
 const Position = require("../models/position");
+const { body, validationResult } = require("express-validator");
 
 exports.index = async (req, res, next) => {
   let error = "";
@@ -18,30 +19,41 @@ exports.create_get = (req, res) => {
   res.render("clubs_create", { title: "Create New Club", error: "" });
 };
 
-exports.create_post = (req, res, next) => {
-  const clubName = req.body.clubname;
-  const countryName = req.body.country;
-  //------------------------
-  // VALIDATE INPUTS HERE
-  //------------------------
-  const newClub = new Club({
-    name: clubName,
-    country: countryName,
-    players: [],
-  });
-  newClub
-    .save()
-    .then(() => {
-      res.redirect("/clubs");
-    })
-    .catch((err) => {
-      // res.render("clubs_create", {
-      //   title: "Create New Club",
-      //   error: err,
-      // });
-      return next(err);
+exports.create_post = [
+  body("clubname", "Name Cannot Be Blank").trim().isLength({ min: 5 }).escape(),
+  body("country", "Clubs Must Have A Country").notEmpty().trim().escape(),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    const clubName = req.body.clubname;
+    const countryName = req.body.country;
+    if (!errors.isEmpty()) {
+      return res.render("clubs_create", {
+        title: "Create New Club",
+        clubname: clubName,
+        country: countryName,
+        error: "Some Values Are Missing",
+      });
+    }
+    const newClub = new Club({
+      name: clubName,
+      country: countryName,
+      players: [],
     });
-};
+    newClub
+      .save()
+      .then(() => {
+        res.redirect("/clubs");
+      })
+      .catch((err) => {
+        // res.render("clubs_create", {
+        //   title: "Create New Club",
+        //   error: err,
+        // });
+        return next(err);
+      });
+  },
+];
 
 exports.detail = async (req, res, next) => {
   let error = "";

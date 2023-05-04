@@ -8,6 +8,7 @@
     "server": " SET DEBUG=football Inventory:* & npm run dev"
   },
   "dependencies": {
+    "@types/express-validator": "^3.0.0",
     "async": "^3.2.4",
     "connect-livereload": "^0.6.1",
     "cookie-parser": "~1.4.4",
