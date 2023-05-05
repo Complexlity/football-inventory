@@ -181,8 +181,6 @@ exports.update_get = async (req, res) => {
 exports.update_post = [
   playerValidationChain(),
   async (req, res) => {
-    console.log("I am here");
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -197,9 +195,6 @@ exports.update_post = [
       price,
       forsale,
     } = req.body;
-    //------------------------
-    // VALIDATE INPUTS HERE
-    //------------------------
 
     await Promise.all([
       Player.findOne({ _id: id }),
@@ -212,11 +207,12 @@ exports.update_post = [
       clubId = newClub._id;
 
       // Check if old and new club are not the same. Deletes player from old club and adds player to new club
-      if (player.club !== clubId) {
+      if (!player.club.equals(clubId)) {
         oldClub = await Club.findOne({ _id: player.club });
         oldClub.players = oldClub.players.filter(
           (value) => value !== player._id
         );
+        oldClub.save();
         newClub.players.push(player._id);
       }
 
@@ -228,7 +224,7 @@ exports.update_post = [
       player.price = price;
       player.forSale = forsale === "1";
 
-      await Promise.all([player.save(), newClub.save(), oldClub.save()]);
+      await Promise.all([player.save(), newClub.save()]);
       res.redirect("/players");
     });
   },
